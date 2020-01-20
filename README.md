@@ -1,24 +1,30 @@
 # Getting & Cleaning Data Course Project
-Block_1-  * Check if a data dir exist, create one if not
-          * Download zip file
-Block_2
-          * read the data into objects in R
-          * Create a list of Features by name & list of activities by name
-          * Read Test data: 30% of the subject generated the test data 
-          * Read training data : 70% of the subject generated the test data 
-Block_3
-          * Merge Data 
-          * merge Subject data from test & Train
-          * merge Activities data from test & Train
-          * merge Features data from test & Train
-Block_4          
 
-          * consolidation | One Datasett.
-          * Cleanup and add descriptive naming
-Block_5
-          * calculate the mean of every variable
-          * Order data by SubjectID & Activity
-          * replicate file to file.txt
+CodeBlock_1  
+
+              Check if a data dir exist, create one if not
+              Download zip file
+CodeBlock_2 
+
+              read the data into objects in R
+              Create a list of Features by name & list of activities by name
+              Read Test data: 30% of the subject generated the test data 
+              Read training data : 70% of the subject generated the test data 
+CodeBlock_3
+
+              Merge Data 
+              merge Subject data from test & Train
+              merge Activities data from test & Train
+              merge Features data from test & Train
+CodeBlock_4          
+
+              Consolidation | One Datasett.
+              Cleanup and add descriptive naming
+CodeBlock_5
+
+              Calculate the mean of every variable
+              Order data by SubjectID & Activity
+              Replicate file to file.txt
 
 Variable List :
 

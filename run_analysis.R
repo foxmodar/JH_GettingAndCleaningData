@@ -1,7 +1,7 @@
 # Getting & Cleaning Data Course Project
 
 library(tidyverse)
-
+# Block_1
 #----------------------------------------Check if a data dir exist, create one if not
 
   if(!file.exists("./RawData")){
@@ -30,6 +30,8 @@ list.files("RawData/UCI HAR Dataset/train//")
 
 # [1] "Inertial Signals"  "subject_train.txt" "X_train.txt"       "y_train.txt"      
 #-------------------------------------------------------------Read Files-------------------------------------------------------------------------- 
+
+# Block_2
 
 # 1- Create a list of Features by name & list of activities by name
 
@@ -69,6 +71,9 @@ colnames(Train_Activities) <- "Act-Code"    # Rename columns
 Train_Features <- read.table("RawData/UCI HAR Dataset/train/X_train.txt", header = FALSE)  # 7352 Observation - 561 columns(features)
 
 #-------------------------------------------------------------------------------------
+
+# Block_3
+
 # Merge each category [subjects, Features, Activites]
 
 # merge Subject data
@@ -85,6 +90,7 @@ A_Data <- A_Data[,2] # only extract Act-Name
 F_Data <- rbind(Test_Features, Train_Features) # 10299 Observation- 561 Column(Features)
 names(F_Data) <- Features[,2]  # Rename each of the 561 column/features
 
+#Block_4
 # consolidation | One Datasett.
 Consolidated <- cbind(S_Data, A_Data, F_Data) # combine all data
 
@@ -106,6 +112,8 @@ names(Extract) <- gsub("Mag", "Magnitude-", names(Extract))
 names(Extract) <- gsub("BodyBody", "Body-", names(Extract))
 names(Extract) <- gsub("mean", "Mean-", names(Extract))
 names(Extract) <- gsub("std", "STD-", names(Extract))
+
+#Block_5
 
 ####Create a second, independent tidy data set with the average of each variable for each activity and each subject
 Extract_replica <- aggregate(. ~SubjectID + Activity, Extract, FUN = mean)

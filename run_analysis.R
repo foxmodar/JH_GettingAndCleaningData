@@ -1,6 +1,7 @@
 # Getting & Cleaning Data Course Project
 
 library(tidyverse)
+library(reshape2)
 # Block_1
 #----------------------------------------Check if a data dir exist, create one if not
 
@@ -94,7 +95,7 @@ names(F_Data) <- Features[,2]  # Rename each of the 561 column/features
 # consolidation | One Datasett.
 Consolidated <- cbind(S_Data, A_Data, F_Data) # combine all data
 
-Extract <- Consolidated[,grep("-(mean|std)\\(\\)", Features[,2])] # extract all features containing mean & std
+Extract <- Consolidated[,grep("mean|std", Features[,2])] # extract all features containing mean & std
 
 #-----------------------------------------------------------------------------------------
 # use make.names() to Make syntactically valid names out of the character vectors.
@@ -116,9 +117,12 @@ names(Extract) <- gsub("std", "STD-", names(Extract))
 #Block_5
 
 ####Create a second, independent tidy data set with the average of each variable for each activity and each subject
-Extract_replica <- aggregate(. ~SubjectID + Activity, Extract, FUN = mean)
+# melt the SubjectID and Activities Columns
+Extract_Melted <- melt(Extract,(id.vars=c("SubjectID","Activity")))
 
-Extract_replica <-Extract_replica[order(Extract_replica$SubjectID,Extract_replica$Activity),]
+#calculate the mean of features and save into a new object
+Extract_replica <- dcast(Extract_Melted, SubjectID + Activity ~ variable, mean)
 
+names(Extract_replica)[-c(1:2)] <- paste("Mean-" , names(Extract_replica)[-c(1:2)])
 #Save this replica to local file
-write.table(Extract_replica, file = "tidydataset.txt", row.name=FALSE)
+write.table(Extract_replica, file = "tidydataset.txt", sep = ",")
